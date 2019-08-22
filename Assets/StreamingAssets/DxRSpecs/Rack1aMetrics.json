@@ -1,0 +1,20 @@
+{
+  "data": {
+    "url": "Rack1aMetrics.csv"
+  },
+  "mark": "sphere",
+  "encoding": {
+    "x": {
+      "field": "ts",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "host",
+      "type": "nominal"
+    },
+    "z": {
+      "field": "mem_free",
+      "type":"quantitative"
+    }
+  }
+}

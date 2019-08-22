@@ -1,0 +1,38 @@
+{
+  "data": {
+    "url": "Rack6aUsage_aggr.csv"
+  },
+  "mark": "cube",
+  "encoding": {
+    "x": {
+      "field": "ts",
+      "type": "nominal",
+      "axis":
+      {
+        "title": "",
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "mem_free",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0,1]
+      },
+      "axis":
+      {
+        "title": ""
+      }
+    },
+    "height": {
+      "field": "mem_free",
+      "type": "quantitative",
+      "scale": {
+        "domain": [0,1]
+      }
+    },
+    "yoffsetpct": {
+      "value": -0.5
+    }
+  }
+}      

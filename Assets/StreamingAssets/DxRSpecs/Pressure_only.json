@@ -1,0 +1,26 @@
+{
+  "height":500,
+  "width":500,
+  "data": { "url": "DR_Fill.csv" },
+  "mark": "connector",
+  "encoding": {
+    "x": {
+      "field": "Time (sec)",
+      "type": "quantitative",
+      "axis": {
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "PT-F3 Pressure [MPa]",
+      "type": "quantitative",
+      "scale": {
+        "domain": [-60,100]
+      },
+      "axis": {
+        "titlePadding": 50,
+        "tickCount": 9
+      }
+    }
+  }
+}

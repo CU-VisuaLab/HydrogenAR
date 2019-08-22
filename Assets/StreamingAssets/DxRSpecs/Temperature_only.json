@@ -1,0 +1,26 @@
+{
+  "height":500,
+  "width":500,
+  "data": { "url": "DR_Fill.csv" },
+  "mark": "connector",
+  "encoding": {
+    "x": {
+      "field": "Time (sec)",
+      "type": "quantitative",
+      "axis": {
+        "title": "",
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "TT-F3 Temperature [C]",
+      "type": "quantitative",
+      "scale": {
+        "domain": [-60,100]
+      },
+      "axis": {
+        "ticks": false
+      }
+    }
+  }
+}

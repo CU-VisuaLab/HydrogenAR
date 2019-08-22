@@ -1,0 +1,20 @@
+{
+  "data": {
+    "url": "example.json"
+  },
+  "mark": "sphere",
+  "encoding": {
+    "x": {
+      "field": "x",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "z",
+      "type": "quantitative"
+    }
+  }
+}

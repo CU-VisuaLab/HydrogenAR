@@ -1,0 +1,33 @@
+{
+  "data": {
+    "url": "nozzle_reliability.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Number_of_Cycles",
+      "type": "quantitative",
+      "axis":
+      {
+        "ticks": false,
+        "labels": false,
+        "tickCount": 7
+      }
+    },
+    "height": {
+      "field": "PDF_of_Failure_at_x",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "PDF_of_Failure_at_x",
+      "type": "quantitative",
+      "axis": {
+        "title": "PDF of Failure",
+        "titlePadding": 60
+      }
+    },
+    "yoffsetpct": {
+      "value": -0.5
+    }
+  }
+}
