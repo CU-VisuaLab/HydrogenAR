@@ -17,7 +17,7 @@ public class HostMetrics : MonoBehaviour
     public enum MetricType { Temperature, Usage, Jobs };
     private MetricType displayMetric;
 
-    private float fastforwardRatio = 1;
+    private float fastforwardRatio = 0.5f;
     [Tooltip("How large of a window to aggregate over")]
     public float timestepDelta = 1;
 
@@ -244,7 +244,7 @@ public class HostMetrics : MonoBehaviour
     {
         fastforwardRatio = speed;
         GetComponentInChildren<HostHeatmap>(true).UpdatePlaybackSpeed(timestepDelta / fastforwardRatio);
-        AggregateSummary[] aggregates = transform.parent.GetComponentsInChildren<AggregateSummary>();
+        AggregateSummary[] aggregates = transform.parent.GetComponentsInChildren<AggregateSummary>(true);
         foreach (AggregateSummary aggr in aggregates)
         {
             aggr.UpdatePlaybackSpeed(timestepDelta / fastforwardRatio);

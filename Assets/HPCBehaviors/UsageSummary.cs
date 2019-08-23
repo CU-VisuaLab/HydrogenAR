@@ -49,18 +49,19 @@ public class UsageSummary : AggregateSummary
                 if (metrics.WIMPiece != null)
                     metrics.WIMPiece.GetComponent<Renderer>().material.color = Color.Lerp(Color.white, Color.black, value);
             }
-            transform.parent.GetComponentInChildren<HostMetrics>().WIMPiece.GetComponent<WIMPiece>().setValue((int)(100 * usage));
+            transform.parent.GetComponentInChildren<HostMetrics>().WIMPiece.GetComponent<WIMPiece>().setValue((int)(Mathf.Round(100 * usage)));
         }
     }
     public override void UpdatePlaybackSpeed(float frequency)
     {
         CancelInvoke();
+        float playback = Mathf.Abs(frequency);
         incrementor = (int)Mathf.Sign(frequency);
-        InvokeRepeating("CycleTimestamp", 0, Mathf.Abs(frequency));
+        InvokeRepeating("CycleTimestamp", 0, playback);
     }
     private void updateUsagePrefab(float value)
     {
         usage = value;
-        usageObject.transform.Find("Canvas/UsageText").GetComponent<Text>().text = "Usage: " + (100 * usage).ToString() + "%";
+        usageObject.transform.Find("Canvas/UsageText").GetComponent<Text>().text = "Usage: " + ((int)(10000 * usage) / 100f).ToString() + "%";
     }
 }

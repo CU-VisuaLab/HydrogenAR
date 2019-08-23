@@ -84,7 +84,17 @@ public class VisSpatialMappingTracking : MonoBehaviour
         /*Invoke("fin", 1);
         Invoke("fin", 2);
         Invoke("fin", 3);
-        Invoke("fin", 4);*/
+        Invoke("fin", 4);
+        Invoke("fin", 5);
+        Invoke("fin", 6);
+        Invoke("fin", 7);
+        Invoke("fin", 8);
+        Invoke("fin", 9);
+        Invoke("fin", 10);
+        Invoke("fin", 11);
+        Invoke("fin", 12);
+        Invoke("fin", 13);
+        Invoke("fin", 14);*/
         currentFocus = -1;
         mutex = false;
     }
@@ -94,7 +104,17 @@ public class VisSpatialMappingTracking : MonoBehaviour
         if (calibrating[0]) finishCalibrating(0);
         else if (calibrating[1]) finishCalibrating(1);
         else if (calibrating[2]) finishCalibrating(2);
-        else finishCalibrating(3);
+        else if (calibrating[3]) finishCalibrating(3);
+        else if (calibrating[4]) finishCalibrating(4);
+        else if (calibrating[5]) finishCalibrating(5);
+        else if (calibrating[6]) finishCalibrating(6);
+        else if (calibrating[7]) finishCalibrating(7);
+        else if (calibrating[8]) finishCalibrating(8);
+        else if (calibrating[9]) finishCalibrating(9);
+        else if (calibrating[10]) finishCalibrating(10);
+        else if (calibrating[11]) finishCalibrating(11);
+        else if (calibrating[12]) finishCalibrating(12);
+        else finishCalibrating(13);
     }
     // Update is called once per frame
     void Update()
@@ -126,7 +146,7 @@ public class VisSpatialMappingTracking : MonoBehaviour
             {
                 GameObject trackedObject = TrackerBehaviours[i];
                 //GameObject.Find("DebugText").GetComponent<Text>().text = "Looking for Marker: " + trackedObject.transform.name.ToUpper().Replace("MARKER", "");
-                if (!calibrating[i] || totalPositions[i].Count == 10)
+                if (!calibrating[i] || totalPositions[i].Count == 8)
                 {
                     finishCalibrating(i);
                     continue;

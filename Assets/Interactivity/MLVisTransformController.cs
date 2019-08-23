@@ -58,6 +58,7 @@ public class MLVisTransformController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject.Find("DebugText").GetComponent<Text>().text = "";
         if (triggerDown && mode == ControllerLaserMode.PickAndPlace)
         {
             UpdateDragging();

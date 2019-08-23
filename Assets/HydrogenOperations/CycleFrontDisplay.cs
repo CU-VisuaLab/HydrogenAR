@@ -47,11 +47,15 @@ public class CycleFrontDisplay : MonoBehaviour
     {
         if (touchpad.Direction == MLInputControllerTouchpadGestureDirection.Right)
         {
+            controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, MLInputControllerFeedbackIntensity.Medium);
             cycleView(1);
+            Invoke("StopVibrating", 0.5f);
         }
         else if (touchpad.Direction == MLInputControllerTouchpadGestureDirection.Left)
         {
+            controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, MLInputControllerFeedbackIntensity.Medium);
             cycleView(-1);
+            Invoke("StopVibrating", 0.5f);
         }
     }
     private void cycleView(int indexIncrementer)
@@ -65,5 +69,9 @@ public class CycleFrontDisplay : MonoBehaviour
             controller.StartFeedbackPatternLED((MLInputControllerFeedbackPatternLED)patternNumber, MLInputControllerFeedbackColorLED.PastelMysticBlue, 60);
         else
             controller.StartFeedbackPatternLED((MLInputControllerFeedbackPatternLED)patternNumber, MLInputControllerFeedbackColorLED.BrightLunaYellow, 60);
+    }
+    private void StopVibrating()
+    {
+        controller.StopFeedbackPatternVibe();
     }
 }

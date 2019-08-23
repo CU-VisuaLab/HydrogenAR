@@ -19,16 +19,15 @@ public class SwitchModes : MonoBehaviour
     {
         controller = FindObjectOfType<ControllerConnectionHandler>().ConnectedController;
         MLInput.OnControllerTouchpadGestureEnd += switchMode;
-        MLInput.OnControllerButtonDown += resetTank;
         MLInput.OnTriggerDown += triggerDown;
         MLInput.OnTriggerUp += triggerUp;
 
         modeIndex = 0;
-        modes = new string[] {"label", "time-series", "clear"};
+        modes = new string[] {"label", "PDF-graphs", "clear"};
 
         hydrogenPOIs = FindObjectsOfType<HydrogenPOI>();
         SetMode("label", true);
-        SetMode("time-series", false);
+        SetMode("PDF-graphs", false);
 
         dragging = false;
     }
@@ -48,15 +47,19 @@ public class SwitchModes : MonoBehaviour
         SetMode(modes[modeIndex], false);
         if (touchpad.Direction == MLInputControllerTouchpadGestureDirection.Up)
         {
+            controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, MLInputControllerFeedbackIntensity.Medium);
             modeIndex = (modeIndex + 1) % modes.Length;
-            GameObject.Find("DebugText").GetComponent<Text>().text = char.ToUpper(modes[modeIndex][0]) + modes[modeIndex].Substring(1);
+            GameObject.Find("StatusText").GetComponent<Text>().text = char.ToUpper(modes[modeIndex][0]) + modes[modeIndex].Substring(1);
             Invoke("ClearHUDText", 5);
+            Invoke("StopVibrating", 0.5f);
         }
         else if (touchpad.Direction == MLInputControllerTouchpadGestureDirection.Down)
         {
+            controller.StartFeedbackPatternVibe(MLInputControllerFeedbackPatternVibe.Buzz, MLInputControllerFeedbackIntensity.Medium);
             modeIndex = (modeIndex + modes.Length - 1) % modes.Length;
-            GameObject.Find("DebugText").GetComponent<Text>().text = char.ToUpper(modes[modeIndex][0]) + modes[modeIndex].Substring(1);
+            GameObject.Find("StatusText").GetComponent<Text>().text = char.ToUpper(modes[modeIndex][0]) + modes[modeIndex].Substring(1);
             Invoke("ClearHUDText", 5);
+            Invoke("StopVibrating", 0.5f);
         }
         SetMode(modes[modeIndex], true);
     }
@@ -71,29 +74,19 @@ public class SwitchModes : MonoBehaviour
         dragging = false;
     }
 
-    private void resetTank(byte controllerId, MLInputControllerButton button)
-    {
-        if (button == MLInputControllerButton.HomeTap)
-        {
-            FindObjectOfType<CarFillup>().resetTank();
-            GameObject.Find("DebugText").GetComponent<Text>().text = "New Tank";
-            Invoke("ClearHUDText", 3);
-        }
-    }
-
     private void SetMode(string modeString, bool activate)
     {
         if (modeString == "label")
         {
             foreach (HydrogenPOI poi in hydrogenPOIs) poi.metricObject.SetActive(activate);
         }
-        else if (modeString == "time-series")
+        else if (modeString == "PDF-graphs")
         {
             foreach (HydrogenPOI poi in hydrogenPOIs) poi.timeSeriesObject.SetActive(activate);
         }
     }
     void ClearHUDText()
     {
-        GameObject.Find("DebugText").GetComponent<Text>().text = "";
+        GameObject.Find("StatusText").GetComponent<Text>().text = "";
     }
 }

@@ -59,6 +59,30 @@ public class CarFillup : MonoBehaviour
         InitializeCar();
     }
 
+    private void resetCar()
+    {
+        CancelInvoke();
+        nozzleEngaged = null;
+        Destroy(nozzle);
+        Destroy(slider);
+
+        Vis[] dxrVises = car.GetComponentsInChildren<Vis>();
+        foreach (Vis vis in dxrVises)
+        {
+            Transform dxrMarks = vis.transform.Find("DxRView/DxRMarks");
+            foreach (Transform markTransform in dxrMarks)
+            {
+                markTransform.GetComponent<Renderer>().enabled = false;
+                if (markTransform.Find("Cylinder") != null)
+                    markTransform.Find("Cylinder").GetComponent<Renderer>().enabled = false;
+            }
+        }
+        car.GetComponentInChildren<FlowVisualization>().flowRate = 0;
+        tankFill.transform.localPosition = initialFillPosition;
+        tankFill.transform.localScale = initialFillScale;
+        visIndex = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -78,14 +102,14 @@ public class CarFillup : MonoBehaviour
         }
         if (nozzleEngaged == null)
         {
-            if (Vector3.Distance(fillCap.transform.position, nozzleTip_70.transform.position) < 0.15f)
+            if (Vector3.Distance(fillCap.transform.position, nozzleTip_70.transform.position) < 0.25f)
             {
                 car.GetComponentInChildren<FlowVisualization>().flowRate = 1.5f;
                 nozzleEngaged = nozzleTip_70;
                 fillRate = 20;
                 initializeFilling();
             }
-            else if (Vector3.Distance(fillCap.transform.position, nozzleTip_35.transform.position) < 0.15f)
+            else if (Vector3.Distance(fillCap.transform.position, nozzleTip_35.transform.position) < 0.25f)
             {
                 car.GetComponentInChildren<FlowVisualization>().flowRate = .75f;
                 nozzleEngaged = nozzleTip_35;
@@ -185,9 +209,7 @@ public class CarFillup : MonoBehaviour
         if (button == MLInputControllerButton.Bumper) fastforwardRate = 10;
         else if (button == MLInputControllerButton.HomeTap)
         {
-            CancelInvoke();
-            Destroy(car);
-            InitializeCar();
+            resetCar();
         }
     }
     private void ButtonUp(byte controllerId, MLInputControllerButton button)

@@ -36,7 +36,7 @@ public class WIMFocusObject : MonoBehaviour
         connector = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
         connector.transform.GetComponent<Renderer>().material = Resources.Load("Materials/TransparencyStripes") as Material;
         foreach (GameObject focusObject in focusObjects) focusObject.SetActive(false);
-        currentFocusIndex = 1;
+        currentFocusIndex = 0;
         focusObjects[currentFocusIndex].SetActive(true);
         visInitialized = false;
         highlight = Resources.Load("Materials/HydrogenFill") as Material;
@@ -45,7 +45,7 @@ public class WIMFocusObject : MonoBehaviour
         incrementStarted = false;
         cycleStep = -1;
         incrementor = 1;
-        UpdatePlaybackSpeed(1);
+        UpdatePlaybackSpeed(0.5f);
     }
 
     // Update is called once per frame
@@ -160,7 +160,6 @@ public class WIMFocusObject : MonoBehaviour
     public void UpdateTimestepIndex()
     {
         //if (cycleStep == index) return;
-
         Transform dxrMarks = focusObjects[1].transform.Find("DxRView/DxRMarks");
         int childCount = dxrMarks.childCount;
 
@@ -171,6 +170,7 @@ public class WIMFocusObject : MonoBehaviour
             oldChild.GetComponent<Renderer>().material = defaultMaterial;
         }
 
+        dxrMarks.GetChild(0).GetComponent<Renderer>().material = defaultMaterial;
         //cycleStep = index;
         cycleStep += incrementor;
         if (cycleStep < 0) cycleStep += childCount;
@@ -192,8 +192,9 @@ public class WIMFocusObject : MonoBehaviour
 
     public void UpdatePlaybackSpeed(float playback)
     {
+        CancelInvoke();
         frequency = Mathf.Abs(playback);
         incrementor = (int)Mathf.Sign(playback);
-        InvokeRepeating("UpdateTimestepIndex", 0, frequency);
+        InvokeRepeating("UpdateTimestepIndex", 0, 1/frequency);
     }
 }

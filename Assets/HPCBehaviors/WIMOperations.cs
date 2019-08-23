@@ -29,7 +29,6 @@ public class WIMOperations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject.Find("DebugText").GetComponent<Text>().text = "";
         if (holdingWIM)
         {
             GameObject.Find("WIM_Model").transform.position += (transform.position - previousControllerPosition);

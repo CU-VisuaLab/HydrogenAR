@@ -29,8 +29,6 @@ public class UpdatePlaybackSpeed : MonoBehaviour
         _controllerConnectionHandler = FindObjectOfType<ControllerConnectionHandler>(); // Assumes there is only one
         MLInput.OnTriggerDown += HandleOnTriggerDown;
         MLInput.OnTriggerUp += HandleOnTriggerUp;
-        //UpdateIt();
-        //Invoke("UpdateIt", 3);
     }
 
     void UpdateIt()
@@ -38,10 +36,14 @@ public class UpdatePlaybackSpeed : MonoBehaviour
         HostMetrics[] hosts = FindObjectsOfType<HostMetrics>();
         foreach (HostMetrics host in hosts)
         {
-            host.UpdatePlaybackSpeed(-5f);
+            host.UpdatePlaybackSpeed(1f);
         }
 
-        Debug.Log("HEY");
+        WIMFocusObject[] wimFocusObjects = Resources.FindObjectsOfTypeAll(typeof(WIMFocusObject)) as WIMFocusObject[];
+        foreach (WIMFocusObject wimFocus in wimFocusObjects)
+        {
+            wimFocus.UpdatePlaybackSpeed(1f);
+        }
         /*previousMenu.usingSubMenu(false);
         Destroy(playbackSlider);*/
         active = false;
@@ -133,7 +135,7 @@ public class UpdatePlaybackSpeed : MonoBehaviour
         {
             host.UpdatePlaybackSpeed(playbackSpeed);
         }
-        WIMFocusObject[] wimFocusObjects = FindObjectsOfTypeAll(typeof(WIMFocusObject)) as WIMFocusObject[];
+        WIMFocusObject[] wimFocusObjects = Resources.FindObjectsOfTypeAll(typeof(WIMFocusObject)) as WIMFocusObject[];
         foreach(WIMFocusObject wimFocus in wimFocusObjects)
         {
             wimFocus.UpdatePlaybackSpeed(playbackSpeed);

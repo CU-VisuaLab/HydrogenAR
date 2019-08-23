@@ -33,7 +33,11 @@ public class HydrogenPOI : MonoBehaviour
             {
                 timeSeriesObject.transform.position = Camera.main.transform.position + 1.05f * Camera.main.transform.forward;
                 metricObject.transform.position = Camera.main.transform.position + 0.85f * Camera.main.transform.forward;
-                if (transform.name.ToLower().Contains("tip"))
+                /*
+                 * Leaving this out for now: This helps to fit two labels/graphs on w/i the field of view.
+                 * Since only nozzle TIP data is available, we'll put it in the middle.
+                 *                
+                 * if (transform.name.ToLower().Contains("tip"))
                 {
                     timeSeriesObject.transform.position -= 0.04f * Camera.main.transform.right + 0.03f * Camera.main.transform.up;
                     metricObject.transform.position += 0.08f * Camera.main.transform.right + 0.06f * Camera.main.transform.up;
@@ -42,7 +46,7 @@ public class HydrogenPOI : MonoBehaviour
                 {
                     timeSeriesObject.transform.position -= (0.2f * Camera.main.transform.right + 0.12f * Camera.main.transform.up);
                     metricObject.transform.position -= (0.08f * Camera.main.transform.right + 0.06f * Camera.main.transform.up);
-                }
+                }*/
             }
             else
             {
